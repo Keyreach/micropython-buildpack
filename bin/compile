@@ -19,15 +19,7 @@ make axtls > /dev/null
 make > /dev/null
 
 echo "Copy binary to build directory"
-mkdir -p "${BUILD_DIR}/micropython"
-cp ./micropython "${BUILD_DIR}/micropython/"
+mkdir -p "${BUILD_DIR}/bin"
+cp ./micropython "${BUILD_DIR}/bin/"
 
-echo "Micropython location: ${BUILD_DIR}/micropython/micropython"
-
-cd ${BUILD_DIR}
-mkdir -p "./.profile.d"
-cat << EOF > "./.profile.d/00path"
-#!/bin/sh
-export PATH=\$PATH:\$HOME/app/micropython
-EOF
-chmod a+x "./.profile.d/00path"
+echo "Micropython location: ${BUILD_DIR}/bin/micropython"
