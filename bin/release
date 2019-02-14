@@ -20,5 +20,5 @@ BUILD_DIR=$1
 cat << EOF
 ---
 default_process_types:
-  web: PATH=\$PATH:\$HOME/app/bin ./startup
+  web: PATH=\$PATH:\$HOME/bin ./startup
 EOF
