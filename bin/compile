@@ -23,3 +23,10 @@ mkdir -p "${BUILD_DIR}/micropython"
 cp ./micropython "${BUILD_DIR}/micropython/"
 
 echo "Micropython location: ${BUILD_DIR}/micropython/micropython"
+
+mkdir -p "${HOME}/profile.d"
+cat << EOF > "${HOME}/profile.d/00path"
+CURRENT_DIR=$(pwd)
+PATH=\${PATH}:\${CURRENT_DIR}/micropython
+EOF
+chmod a+x "${HOME}/profile.d/00path"

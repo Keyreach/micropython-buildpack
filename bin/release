@@ -16,14 +16,9 @@
 # limitations under the License.
 
 BUILD_DIR=$1
-CURRENT_DIR=$(pwd)
-cat << EOF > "${HOME}/profile.d/00path"
-PATH=${PATH}:${CURRENT_DIR}/micropython
-EOF
-chmod a+x "${HOME}/profile.d/00path"
 
 cat << EOF
 ---
 default_process_types:
-  $(cat ./Procfile)
+  $(cat ${BUILD_DIR}/Procfile)
 EOF
