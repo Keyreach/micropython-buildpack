@@ -20,6 +20,10 @@ if [ ! -d ${DIR} ]; then
   exit 1
 fi
 
+if [ ! -e ${DIR}/Procfile ]; then
+  exit 1
+fi
+
 FILE_COUNT=`find "${DIR}" -name "*.py" | wc -l | awk '{print $1}'`
 if [ "$FILE_COUNT" == "0" ]; then
   exit 1

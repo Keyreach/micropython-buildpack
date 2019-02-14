@@ -19,6 +19,7 @@ make axtls > /dev/null
 make > /dev/null
 
 echo "Copy binary to build directory"
-cp ./micropython $BUILD_DIR/
+mkdir -p "${BUILD_DIR}/micropython"
+cp ./micropython "${BUILD_DIR}/micropython/"
 
-echo "Micropython location: ${BUILD_DIR}/micropython"
+echo "Micropython location: ${BUILD_DIR}/micropython/micropython"
