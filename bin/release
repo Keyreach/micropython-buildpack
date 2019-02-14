@@ -20,5 +20,5 @@ BUILD_DIR=$1
 cat << EOF
 ---
 default_process_types:
-  web: ${HOME}/micropython ./app.py
+  web: ./micropython ./app.py
 EOF
