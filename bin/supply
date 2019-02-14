@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Cloud Foundry Micropython Buildpack
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+INDEX=$4
+
+cd "${CACHE_DIR}"
+echo "Downloading micropython"
+git clone --recurse-submodules https://github.com/micropython/micropython.git
+
+echo "Compiling micropython"
+cd ./micropython/ports/unix
+# givin up to compile micropython with ffi on cflinux2 stack
+sed -i -e 's/FFI = 1/FFI = 0/' ./mpconfigport.mk
+make axtls > /dev/null
+make > /dev/null
+
+echo "Copy binary to build directory"
+cp ./micropython $BUILD_DIR/
