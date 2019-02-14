@@ -17,11 +17,8 @@
 
 BUILD_DIR=$1
 
-ls -1 $HOME
-ls -1 $BUILD_DIR
-
 cat << EOF
 ---
 default_process_types:
-  web: ${BUILD_DIR}/micropython ./app.py
+  web: ${HOME}/micropython ./app.py
 EOF
