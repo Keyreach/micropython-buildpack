@@ -20,3 +20,5 @@ make > /dev/null
 
 echo "Copy binary to build directory"
 cp ./micropython $BUILD_DIR/
+
+echo "Micropython location: ${BUILD_DIR}/micropython"
