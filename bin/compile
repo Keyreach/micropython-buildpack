@@ -24,9 +24,10 @@ cp ./micropython "${BUILD_DIR}/micropython/"
 
 echo "Micropython location: ${BUILD_DIR}/micropython/micropython"
 
-mkdir -p "${HOME}/profile.d"
-cat << EOF > "${HOME}/profile.d/00path"
+cd ${BUILD_DIR}
+mkdir -p "./.profile.d"
+cat << EOF > "./.profile.d/00path"
 #!/bin/sh
-export PATH=\$PATH:\$HOME/micropython
+export PATH=\$PATH:\$HOME/app/micropython
 EOF
-chmod a+x "${HOME}/profile.d/00path"
+chmod a+x "./.profile.d/00path"
