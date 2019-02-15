@@ -7,19 +7,29 @@ CACHE_DIR=$2
 DEPS_DIR=$3
 INDEX=$4
 
-cd "${CACHE_DIR}"
-echo "Downloading micropython"
-git clone --recurse-submodules https://github.com/micropython/micropython.git
-
-echo "Compiling micropython"
-cd ./micropython/ports/unix
-# givin up to compile micropython with ffi on cflinux2 stack
-sed -i -e 's/FFI = 1/FFI = 0/' ./mpconfigport.mk
-make axtls > /dev/null
-make > /dev/null
-
-echo "Copy binary to build directory"
 mkdir -p "${BUILD_DIR}/bin"
-cp ./micropython "${BUILD_DIR}/bin/"
 
-echo "Micropython location: ${BUILD_DIR}/bin/micropython"
+if [ -f "${CACHE_DIR}/bin/micropython" ]
+then
+  echo "Using cached binary"
+  cp "${CACHE_DIR}/bin/micropython" "${BUILD_DIR}/bin/"
+else
+  cd "${CACHE_DIR}"
+  echo "Downloading micropython"
+  if [ ! -d "${CACHE_DIR}/micropython" ]
+  then
+    git clone --recurse-submodules https://github.com/micropython/micropython.git
+  fi
+  echo "Compiling micropython"
+  cd ./micropython/ports/unix
+  # givin up to compile micropython with libffi on cflinuxfs2 stack
+  sed -i -e 's/FFI = 1/FFI = 0/' ./mpconfigport.mk
+  make axtls > /dev/null
+  make > /dev/null
+  echo "Copy binary to build directory"
+  cp ./micropython "${BUILD_DIR}/bin/"
+  echo "Copy binary to cache directory"
+  mkdir -p "${CACHE_DIR}/bin"
+  cp ./micropython "${CACHE_DIR}/bin/"
+fi
+# echo "Micropython location: ${BUILD_DIR}/bin/micropython"
